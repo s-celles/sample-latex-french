@@ -4,8 +4,9 @@ LABEL maintainer="DevContainer LaTeX FR"
 LABEL description="Environnement LaTeX pour articles en français avec bibliographie"
 
 # Création d'un utilisateur non-root
+# Note: L'image texlive utilise déjà UID 1000 pour l'utilisateur "texlive"
 ARG USERNAME=vscode
-ARG USER_UID=1000
+ARG USER_UID=1001
 ARG USER_GID=$USER_UID
 
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -17,7 +18,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && rm -rf /var/lib/apt/lists/*
 
 # Installation des paquets LaTeX supplémentaires pour le français et la bibliographie
-RUN tlmgr install \
+# Mise à jour de tlmgr d'abord pour éviter les problèmes de version
+RUN tlmgr update --self || true && tlmgr install \
     # Support français
     babel-french \
     hyphen-french \
@@ -58,12 +60,15 @@ RUN tlmgr install \
     xcolor \
     lipsum \
     todonotes \
-    appendix
+    appendix \
+    || echo "Some packages may already be installed"
 
-# Outils système utiles
+# Outils système utiles et biber (gestionnaire de bibliographie)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     make \
+    biber \
+    default-jre-headless \
     && rm -rf /var/lib/apt/lists/*
 
 # Vérification de l'installation

@@ -94,6 +94,7 @@
         ],
         "ltex.language": "fr",
         "ltex.additionalRules.motherTongue": "fr",
+        "ltex.java.path": "/usr/lib/jvm/default-java",
         "editor.wordWrap": "on",
         "files.associations": {
           "*.tex": "latex",
