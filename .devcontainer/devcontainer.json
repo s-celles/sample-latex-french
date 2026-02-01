@@ -1,0 +1,107 @@
+{
+  "name": "LaTeX - French Articles",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "James-Yu.latex-workshop",
+        "valentjn.vscode-ltex",
+        "streetsidesoftware.code-spell-checker-french"
+      ],
+      "settings": {
+        "latex-workshop.latex.recipe.default": "latexmk (lualatex)",
+        "latex-workshop.latex.recipes": [
+          {
+            "name": "latexmk (lualatex)",
+            "tools": ["lualatexmk"]
+          },
+          {
+            "name": "latexmk (pdflatex)",
+            "tools": ["pdflatexmk"]
+          },
+          {
+            "name": "pdflatex -> biber -> pdflatex x2",
+            "tools": ["pdflatex", "biber", "pdflatex", "pdflatex"]
+          }
+        ],
+        "latex-workshop.latex.tools": [
+          {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-lualatex",
+              "-outdir=%OUTDIR%",
+              "%DOC%"
+            ]
+          },
+          {
+            "name": "pdflatexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-pdf",
+              "-outdir=%OUTDIR%",
+              "%DOC%"
+            ]
+          },
+          {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "%DOC%"
+            ]
+          },
+          {
+            "name": "biber",
+            "command": "biber",
+            "args": ["%DOCFILE%"]
+          }
+        ],
+        "latex-workshop.latex.autoBuild.run": "onSave",
+        "latex-workshop.latex.clean.fileTypes": [
+          "*.aux",
+          "*.bbl",
+          "*.blg",
+          "*.idx",
+          "*.ind",
+          "*.lof",
+          "*.lot",
+          "*.out",
+          "*.toc",
+          "*.acn",
+          "*.acr",
+          "*.alg",
+          "*.glg",
+          "*.glo",
+          "*.gls",
+          "*.fls",
+          "*.log",
+          "*.fdb_latexmk",
+          "*.snm",
+          "*.nav",
+          "*.run.xml",
+          "*.bcf"
+        ],
+        "ltex.language": "fr",
+        "ltex.additionalRules.motherTongue": "fr",
+        "editor.wordWrap": "on",
+        "files.associations": {
+          "*.tex": "latex",
+          "*.bib": "bibtex"
+        }
+      }
+    }
+  },
+  "postCreateCommand": "echo 'Environnement LaTeX prêt!'",
+  "remoteUser": "vscode"
+}
