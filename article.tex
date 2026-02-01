@@ -1,0 +1,161 @@
+% Article en français avec bibliographie
+% Compiler avec LuaLaTeX ou pdfLaTeX
+
+\documentclass[a4paper, 11pt]{article}
+
+% === ENCODAGE ET LANGUE ===
+\usepackage[french]{babel}
+\usepackage{csquotes}
+
+% === MISE EN PAGE ===
+\usepackage[
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+]{geometry}
+
+% === POLICES (décommenter pour LuaLaTeX) ===
+% \usepackage{fontspec}
+% \setmainfont{TeX Gyre Termes}
+
+% === TYPOGRAPHIE ===
+\usepackage{microtype}
+
+% === MATHS ===
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{siunitx}
+\sisetup{locale=FR}
+
+% === TABLEAUX ET FIGURES ===
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% === BIBLIOGRAPHIE ===
+\usepackage[
+    backend=biber,
+    style=numeric,          % ou authoryear, apa, ieee...
+    sorting=nyt,
+    maxbibnames=99
+]{biblatex}
+\addbibresource{references.bib}
+
+% === LIENS ===
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=green!50!black,
+    urlcolor=blue!70!black
+]{hyperref}
+\usepackage[french]{cleveref}
+
+% === EN-TÊTES ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% === CODE SOURCE (optionnel) ===
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true
+}
+
+% === MÉTADONNÉES ===
+\title{Titre de l'article}
+\author{Prénom Nom\\
+    \small Affiliation\\
+    \small \texttt{email@example.com}
+}
+\date{\today}
+
+% ============================================
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Résumé de l'article en quelques phrases. Cet article présente...
+    
+    \textbf{Mots-clés :} mot1, mot2, mot3
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% === INTRODUCTION ===
+\section{Introduction}
+
+Voici une citation~\cite{exemple2023}. On peut aussi citer plusieurs sources~\cite{exemple2023, autreexemple2022}.
+
+Les guillemets français s'utilisent ainsi : \enquote{texte entre guillemets}.
+
+% === MÉTHODES ===
+\section{Méthodes}
+
+\subsection{Sous-section exemple}
+
+Une équation numérotée :
+\begin{equation}
+    E = mc^2
+    \label{eq:einstein}
+\end{equation}
+
+On peut y faire référence avec \cref{eq:einstein}.
+
+Un tableau propre :
+\begin{table}[htbp]
+    \centering
+    \caption{Résultats expérimentaux}
+    \label{tab:resultats}
+    \begin{tabular}{lcc}
+        \toprule
+        Paramètre & Valeur & Unité \\
+        \midrule
+        Température & \num{25.3} & \si{\celsius} \\
+        Pression & \num{101325} & \si{\pascal} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% === RÉSULTATS ===
+\section{Résultats}
+
+Une figure :
+\begin{figure}[htbp]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{image.png}
+    \fbox{\parbox{0.6\textwidth}{\centering [Placeholder pour image]}}
+    \caption{Description de la figure}
+    \label{fig:exemple}
+\end{figure}
+
+Référence à la \cref{fig:exemple} et au \cref{tab:resultats}.
+
+% === DISCUSSION ===
+\section{Discussion}
+
+Discussion des résultats...
+
+% === CONCLUSION ===
+\section{Conclusion}
+
+Conclusion de l'article...
+
+% === BIBLIOGRAPHIE ===
+\printbibliography[heading=bibintoc, title={Références}]
+
+% === ANNEXES (optionnel) ===
+% \appendix
+% \section{Données supplémentaires}
+
+\end{document}
