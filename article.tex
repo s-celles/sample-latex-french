@@ -4,6 +4,7 @@
 \documentclass[a4paper, 11pt]{article}
 
 % === ENCODAGE ET LANGUE ===
+\usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{csquotes}
 
@@ -44,13 +45,13 @@
 \addbibresource{references.bib}
 
 % === LIENS ===
+\usepackage{xcolor}
 \usepackage[
     colorlinks=true,
     linkcolor=blue!60!black,
     citecolor=green!50!black,
     urlcolor=blue!70!black
 ]{hyperref}
-\usepackage[french]{cleveref}
 
 % === EN-TÊTES ===
 \usepackage{fancyhdr}
@@ -110,7 +111,7 @@ Une équation numérotée :
     \label{eq:einstein}
 \end{equation}
 
-On peut y faire référence avec \cref{eq:einstein}.
+On peut y faire référence avec l'équation~\ref{eq:einstein}.
 
 Un tableau propre :
 \begin{table}[htbp]
@@ -139,7 +140,7 @@ Une figure :
     \label{fig:exemple}
 \end{figure}
 
-Référence à la \cref{fig:exemple} et au \cref{tab:resultats}.
+Référence à la figure~\ref{fig:exemple} et au tableau~\ref{tab:resultats}.
 
 % === DISCUSSION ===
 \section{Discussion}

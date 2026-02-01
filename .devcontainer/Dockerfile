@@ -1,4 +1,4 @@
-FROM texlive/texlive:latest-medium
+FROM texlive/texlive:latest-full
 
 LABEL maintainer="DevContainer LaTeX FR"
 LABEL description="Environnement LaTeX pour articles en français avec bibliographie"
@@ -17,52 +17,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     && rm -rf /var/lib/apt/lists/*
 
-# Installation des paquets LaTeX supplémentaires pour le français et la bibliographie
-# Mise à jour de tlmgr d'abord pour éviter les problèmes de version
-RUN tlmgr update --self || true && tlmgr install \
-    # Support français
-    babel-french \
-    hyphen-french \
-    # Bibliographie moderne
-    biblatex \
-    biber \
-    biblatex-ieee \
-    biblatex-apa \
-    # Polices et typographie
-    fontspec \
-    unicode-math \
-    microtype \
-    # Articles et mise en page
-    geometry \
-    fancyhdr \
-    titlesec \
-    enumitem \
-    # Tableaux et figures
-    booktabs \
-    multirow \
-    float \
-    caption \
-    subcaption \
-    graphicx \
-    # Maths et sciences
-    amsmath \
-    amssymb \
-    mathtools \
-    siunitx \
-    # Code et algorithmes
-    listings \
-    algorithm2e \
-    # Liens et références
-    hyperref \
-    cleveref \
-    # Divers utiles
-    csquotes \
-    xcolor \
-    lipsum \
-    todonotes \
-    appendix \
-    || echo "Some packages may already be installed"
-
 # Outils système utiles et biber (gestionnaire de bibliographie)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
@@ -72,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Vérification de l'installation
-RUN lualatex --version && biber --version
+RUN pdflatex --version && biber --version
 
 # Passage à l'utilisateur non-root
 USER $USERNAME
